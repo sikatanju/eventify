@@ -1,0 +1,16 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Eventify</title>
+        <link href="{% static 'css/styles.css' %}" ref="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="body-font">
+        {% include 'base/navbar_copy.html' %}
+        <div class="mx-auto">{% block content %} {% endblock %}</div>
+    </body>
+</html>
