@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    "crispy_forms",
+    "crispy_tailwind",
+
+
     'eventify',
 ]
 
@@ -129,7 +134,12 @@ STATICFILES_DIRS = [
 
 AUTH_USER_MODEL = 'eventify.User'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = "/events"
+LOGIN_URL = '/login'
+LOGOUT_REDIRECT_URL = '/'
