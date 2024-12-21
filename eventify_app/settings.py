@@ -81,13 +81,13 @@ WSGI_APPLICATION = 'eventify_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eventify',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'sika'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'eventify',
+        # 'HOST': 'localhost',
+        # 'USER': 'root',
+        # 'PASSWORD': 'sika'
     }
 }
 
