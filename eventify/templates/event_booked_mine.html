@@ -10,7 +10,6 @@
             </div>
 
         </div>
-
         <div class="flex flex-col w-full">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div
@@ -81,21 +80,7 @@
                                     >
                                         {{ event.organizer.username }}
                                     </td>
-                                    {% if not request.user.is_superuser %}
-                                    <td
-                                        class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-                                    >
-                                    {% if event.id in booked_ids %}
-                                        <p>Booked</p>
-                                    {% else %}
-                                        <a
-                                            href="{% url 'book_event' event.id %}"
-                                            class="text-indigo-600 hover:text-indigo-900"
-                                            >Book</a
-                                        >
-                                    {% endif %}
-                                    </td>
-                                    {% endif %}
+
                                 </tr>
 
                                 {% empty %}

@@ -14,4 +14,10 @@ urlpatterns = [
     
     path('events/', views.event_home, name='event_home'),
     path('events/create', views.event_create, name='event_create'),
+
+    path('events/booked', views.event_booked_mine, name='event_booked'),
+    path('events/manage', views.event_manage, name='event_manage'),
+
+
+    path('events/book/<int:pk>', views.book_event, name='book_event'),
 ]

@@ -16,10 +16,15 @@ class Event(models.Model):
     organizer = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f'Event: {self.name}'
 
+    @property
     def is_fully_booked(self):
-        return self.bookedevent_set.count() >= self.capacity
+        return self.bookings.count() >= self.capacity
+    
+    @property
+    def current_booked(self):
+        return self.bookings.count()
 
 
 class BookedEvent(models.Model):

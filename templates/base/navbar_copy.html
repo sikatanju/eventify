@@ -4,9 +4,9 @@
         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
     >
         <a
-            href="{% url 'landing_page' %}"
+            href="{% url 'event_home' %}"
             class="flex title-font font-medium items-center text-white mb-4 md:mb-0"
-        >
+        > 
             <img
                 src="{% static 'images/event.svg' %}"
                 class="w-10 h-10 text-white p-2 bg-white rounded-full"
@@ -21,9 +21,13 @@
                 >Signup</a
             >
             {% else %} {% if request.user.is_superuser %}
-            <a href="#" class="mr-5 hover:text-white">Manage Events</a>
+            <a href="{% url 'event_manage' %}" class="mr-5 hover:text-white"
+                >Manage Events</a
+            >
             {% endif %} {% if not request.user.is_superuser %}
-            <a href="#" class="mr-5 hover:text-white">My Booked Events</a>
+            <a href="{% url 'event_booked' %}" class="mr-5 hover:text-white"
+                >My Booked Events</a
+            >
             {% endif %} {% endif %}
         </nav>
         {% if request.user.is_authenticated %} Logged in as: {{ request.user }}
