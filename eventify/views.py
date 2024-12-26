@@ -2,13 +2,14 @@ from django.shortcuts import render
 
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.http import HttpResponse
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.views import LoginView, LogoutView
 
 from .models import Event, BookedEvent
 
-from .forms import CustomUserCreationForm, EventCreateForm
+from .forms import CustomUserCreationForm, EventCreateForm, EventUpdateForm
 
 
 def landing_page(request):
@@ -68,6 +69,28 @@ def event_create(request):
                 return redirect('event_home')
     
         return render(request, 'event_create.html', {'event_form': event_form, 'user': current_user})
+    
+@login_required
+def event_update(request, pk):
+    user = request.user
+    try:
+        event = Event.objects.get(pk=pk)
+        event_ids = Event.objects.filter(organizer=user).values_list('id', flat=True)
+        if not user.is_superuser or pk not in event_ids:
+            return render(request, 'permission_denied.html')
+        
+        event_form = EventUpdateForm(instance=event)
+
+        if request.method == 'POST':
+            event_form = EventUpdateForm(data=request.POST, instance=event)
+            if event_form.is_valid():
+                event_form.save()
+                return redirect('event_manage')
+        
+        return render(request, 'event_update.html', {'event_form': event_form})
+        
+    except Event.DoesNotExist:
+        return render(request, 'event_not_found.html')
     
 
 @login_required
