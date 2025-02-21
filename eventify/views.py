@@ -5,10 +5,8 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.views import LoginView, LogoutView
 
 from .models import Event, BookedEvent
-
 from .forms import CustomUserCreationForm, EventCreateForm, EventUpdateForm
 
 
@@ -19,19 +17,16 @@ def landing_page(request):
 def event_home(request):
     current_user = request.user
     events = Event.objects.all()
-    print(current_user)
-    print(current_user.is_superuser)
     if str(current_user) == 'AnonymousUser':
         return render(request, 'event_home.html', {'events': events})
     
     if not request.user.is_superuser:
         booked_event_ids = set(Event.objects.filter(bookings__user=request.user).values_list('id', flat=True))
-        for id in booked_event_ids:
-            print(id)
         return render(request, 'event_home.html', {'events': events, 'booked_ids': booked_event_ids})
 
 
     return render(request, 'event_home.html', {'events': events})
+
 
 @login_required
 def event_booked_mine(request):
@@ -70,6 +65,7 @@ def event_create(request):
     
         return render(request, 'event_create.html', {'event_form': event_form, 'user': current_user})
     
+
 @login_required
 def event_update(request, pk):
     user = request.user
@@ -111,6 +107,7 @@ def book_event(request, pk):
             return render(request, 'event_not_found.html')
     else:
         return render(request, "organizer_permission_denied.html")
+
 
 class SignupView(generic.CreateView):
     template_name = "registration/signup.html"

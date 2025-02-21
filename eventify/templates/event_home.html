@@ -86,11 +86,13 @@
                                         class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                                     >
                                     {% if event.id in booked_ids %}
-                                        <p>Booked</p>
+                                        <p class="text-emerald-700">Booked</p>
+                                    {% elif event.is_fully_booked %}
+                                        <p class="text-red-500">Booked Out</p>
                                     {% else %}
                                         <a
                                             href="{% url 'book_event' event.id %}"
-                                            class="text-indigo-600 hover:text-indigo-900"
+                                            class="text-blue-500 hover:text-indigo-900"
                                             >Book</a
                                         >
                                     {% endif %}
